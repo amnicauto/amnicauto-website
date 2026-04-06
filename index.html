@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amnic Automation — AI Workflows for Growing Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f4f9ff;
+      --surface2: #eaf3ff;
+      --border: #d0e4f7;
+      --text: #0d1b2a;
+      --muted: #5a7a96;
+      --accent: #1a6fba;
+      --accent-light: #e6f1fb;
+      --accent-hover: #145ea3;
+      --accent-mid: #3b8fd4;
+      --tag-bg: #eaf3ff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 64px;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.35rem; color: var(--text);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .btn-nav {
+      background: var(--accent); color: #fff !important;
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      font-weight: 500 !important; transition: background 0.2s !important;
+    }
+    .btn-nav:hover { background: var(--accent-hover) !important; }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: rgba(255,255,255,0.98); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 1.5rem 5vw 2rem; gap: 1rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1rem; color: var(--text); text-decoration: none;
+      font-weight: 400; padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu .btn-mobile {
+      background: var(--accent); color: #fff !important;
+      padding: 0.75rem 1.25rem; border-radius: 8px;
+      text-align: center; font-weight: 500;
+      border-bottom: none !important; margin-top: 0.25rem;
+    }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 110px 5vw 90px;
+      background: linear-gradient(160deg, #ffffff 0%, #eaf3ff 55%, #d6eaff 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute; right: -8vw; top: 10%;
+      width: clamp(300px, 45vw, 620px); height: clamp(300px, 45vw, 620px);
+      background: radial-gradient(circle, #b8d8f8 0%, #d6eaff 40%, transparent 70%);
+      border-radius: 50%; opacity: 0.6; pointer-events: none;
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+    .hero-orb2 {
+      position: absolute; left: -5vw; bottom: 5%;
+      width: clamp(200px, 28vw, 380px); height: clamp(200px, 28vw, 380px);
+      background: radial-gradient(circle, #c9e4fa 0%, transparent 70%);
+      border-radius: 50%; opacity: 0.4; pointer-events: none;
+      animation: floatOrb 10s 2s ease-in-out infinite;
+    }
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-18px) scale(1.03); }
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--accent); background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      margin-bottom: 1.75rem; width: fit-content;
+      animation: fadeUp 0.6s ease both; backdrop-filter: blur(6px);
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1.08; letter-spacing: -0.03em; max-width: 14ch;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--muted); max-width: 44ch;
+      margin-top: 1.5rem; font-weight: 300; line-height: 1.7;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-ctas {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-top: 2.5rem; animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      padding: 0.8rem 1.75rem; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 500; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      box-shadow: 0 4px 18px rgba(26,111,186,0.25);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,111,186,0.3); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.85); color: var(--text);
+      padding: 0.8rem 1.75rem; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 400; text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      backdrop-filter: blur(6px);
+    }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,111,186,0.12); }
+    .hero-trust {
+      margin-top: 3.5rem; display: flex; align-items: center; gap: 1rem;
+      font-size: 0.82rem; color: var(--muted);
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .trust-dots { display: flex; gap: 4px; }
+    .trust-dots span {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
+    }
+
+    /* ── LOGOS STRIP ── */
+    .logos-strip {
+      padding: 2.5rem 5vw;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+      background: var(--bg);
+    }
+    .logos-label { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+    .logos-row { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+    .logo-pill {
+      font-size: 0.82rem; font-weight: 500; color: var(--muted);
+      background: var(--surface); padding: 0.35rem 0.9rem;
+      border-radius: 100px; border: 1px solid var(--border); white-space: nowrap;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 5vw; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.15; letter-spacing: -0.02em; max-width: 22ch;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .section-sub {
+      font-size: 1rem; color: var(--muted); max-width: 46ch;
+      margin-top: 1rem; font-weight: 300; line-height: 1.75;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .how-inner { max-width: 1100px; margin: 0 auto; }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0; margin-top: 3.5rem;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      background: var(--border);
+    }
+    .step {
+      padding: 2rem 1.75rem; background: #fff;
+      margin: 1px; border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .step:hover { background: var(--accent-light); }
+    .step-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.5rem; color: var(--border); line-height: 1; margin-bottom: 1rem;
+    }
+    .step h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── SERVICES ── */
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.75rem;
+      transition: box-shadow 0.25s, transform 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,111,186,0.04) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .card:hover { box-shadow: 0 10px 36px rgba(26,111,186,0.1); transform: translateY(-3px); }
+    .card:hover::after { opacity: 1; }
+    .card-icon {
+      width: 42px; height: 42px; background: var(--accent-light);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; font-size: 1.2rem;
+      border: 1px solid var(--border);
+    }
+    .card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .tag {
+      font-size: 0.72rem; font-weight: 500;
+      background: var(--tag-bg); color: var(--accent);
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── WHY AMNIC ── */
+    .why { background: var(--accent); color: #fff; }
+    .why .section-label { color: rgba(255,255,255,0.55); }
+    .why .section-title { color: #fff; }
+    .why .section-title em { color: rgba(255,255,255,0.6); }
+    .why .section-sub { color: rgba(255,255,255,0.65); }
+    .why-inner { max-width: 1100px; margin: 0 auto; }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem; margin-top: 3rem;
+    }
+    .why-item {
+      padding: 1.75rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px; transition: background 0.2s;
+    }
+    .why-item:hover { background: rgba(255,255,255,0.13); }
+    .why-item .num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem; color: rgba(255,255,255,0.25); margin-bottom: 0.75rem;
+    }
+    .why-item h3 { font-size: 1rem; font-weight: 500; color: #fff; margin-bottom: 0.4rem; }
+    .why-item p { font-size: 0.875rem; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+    /* ── INDUSTRIES ── */
+    .industries { background: var(--surface); border-top: 1px solid var(--border); }
+    .industries-inner { max-width: 1100px; margin: 0 auto; }
+    .ind-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 3rem;
+    }
+    .ind-card {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem 1.25rem; background: #fff; text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .ind-card:hover { border-color: var(--accent-mid); box-shadow: 0 6px 24px rgba(26,111,186,0.1); transform: translateY(-2px); }
+    .ind-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .ind-card h3 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .ind-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── PILOT CTA ── */
+    .pilot { background: var(--bg); border-top: 1px solid var(--border); }
+    .pilot-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .pilot-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 500;
+      background: #fffbe6; color: #7a5c00;
+      border: 1px solid #f5d85e;
+      padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1.75rem;
+    }
+    .pilot h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.025em;
+    }
+    .pilot h2 em { font-style: italic; color: var(--accent); }
+    .pilot p {
+      color: var(--muted); font-weight: 300;
+      margin-top: 1rem; margin-bottom: 2rem;
+      font-size: 1.05rem; line-height: 1.7;
+    }
+    .pilot-ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 5vw;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      background: var(--bg);
+    }
+    .footer-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem; color: var(--text); text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    footer p { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 640px) {
+      .nav-links .hide-mobile { display: none; }
+      .step { border-bottom: 1px solid var(--border); }
+      .logos-strip { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Amnic<span>.</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#industries">Industries</a>
+    <a href="#how">How It Works</a>
+    <a href="about.html">About</a>
+    <a href="#contact" class="btn-nav">Book a Free Call</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#industries" onclick="closeMenu()">Industries</a>
+  <a href="#how" onclick="closeMenu()">How It Works</a>
+  <a href="about.html">About</a>
+  <a href="#contact" class="btn-mobile" onclick="closeMenu()">Book a Free Call</a>
+</div>
+
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-eyebrow">AI Automation for Small Business</div>
+  <h1>Less busywork.<br><em>More business.</em></h1>
+  <p class="hero-sub">
+    Amnic builds custom AI workflows that handle your repetitive tasks — follow-ups, lead management, data entry, and more — so you can focus on what actually grows your business.
+  </p>
+  <div class="hero-ctas">
+    <a href="#contact" class="btn-primary">
+      Start Your Free Pilot
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="about.html" class="btn-secondary">Meet the Team →</a>
+  </div>
+  <div class="hero-trust">
+    <div class="trust-dots">
+      <span>🏢</span><span>🏠</span><span>🔧</span>
+    </div>
+    Serving insurance agencies, real estate brokerages & trades
+  </div>
+</section>
+
+<div class="logos-strip">
+  <span class="logos-label">Works with your tools:</span>
+  <div class="logos-row">
+    <span class="logo-pill">n8n</span>
+    <span class="logo-pill">Gmail</span>
+    <span class="logo-pill">Google Sheets</span>
+    <span class="logo-pill">Slack</span>
+    <span class="logo-pill">HubSpot</span>
+    <span class="logo-pill">Airtable</span>
+    <span class="logo-pill">Apollo.io</span>
+    <span class="logo-pill">Zapier</span>
+  </div>
+</div>
+
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-label">Process</div>
+    <h2 class="section-title">Up and running in <em>under a week.</em></h2>
+    <p class="section-sub">We handle everything — no technical knowledge required on your end.</p>
+    <div class="steps-grid reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Discovery Call</h3>
+        <p>We learn your workflow, identify the biggest time sinks, and map out what to automate first.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We Build It</h3>
+        <p>Our team builds your custom automation workflow — fully tailored to your tools and processes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>You Review It</h3>
+        <p>We deliver your finished workflow and walk you through exactly how it works. You approve or request changes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>It Goes Live</h3>
+        <p>Your workflow is deployed into your own account. We stay on to support, maintain, and improve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-label">What We Build</div>
+        <h2 class="section-title">Workflows that <em>actually save time.</em></h2>
+      </div>
+      <a href="#contact" class="btn-secondary">Get a Custom Quote →</a>
+    </div>
+    <div class="cards-grid reveal">
+      <div class="card">
+        <div class="card-icon">📬</div>
+        <h3>Lead Follow-Up Automation</h3>
+        <p>Never let a lead go cold. Automatically send personalized follow-up emails and reminders based on pipeline stage.</p>
+        <div class="card-tags"><span class="tag">CRM</span><span class="tag">Email</span><span class="tag">Sequences</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Client Onboarding Workflows</h3>
+        <p>Automate the intake process — send welcome emails, collect credentials, generate contracts, and stay organized.</p>
+        <div class="card-tags"><span class="tag">Onboarding</span><span class="tag">Docs</span><span class="tag">Forms</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Data Entry & Reporting</h3>
+        <p>Stop copying data between spreadsheets and systems. We connect your tools so information flows automatically.</p>
+        <div class="card-tags"><span class="tag">Sheets</span><span class="tag">Airtable</span><span class="tag">Sync</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>AI-Powered Assistants</h3>
+        <p>Custom GPT-backed agents that draft emails, answer FAQs, summarize documents, or help your team move faster.</p>
+        <div class="card-tags"><span class="tag">GPT-4</span><span class="tag">Claude</span><span class="tag">Agents</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔔</div>
+        <h3>Alert & Notification Systems</h3>
+        <p>Get the right information to the right person at the right time — Slack alerts, email digests, or SMS triggers.</p>
+        <div class="card-tags"><span class="tag">Slack</span><span class="tag">SMS</span><span class="tag">Triggers</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h3>Review & Referral Flows</h3>
+        <p>Automatically reach out to happy clients for Google reviews or referrals at the perfect moment.</p>
+        <div class="card-tags"><span class="tag">Reviews</span><span class="tag">Referrals</span><span class="tag">Timing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="why-inner">
+    <div class="section-label">Why Amnic</div>
+    <h2 class="section-title">We're not a software tool.<br><em>We're your automation team.</em></h2>
+    <p class="section-sub">Unlike off-the-shelf platforms, Amnic builds, maintains, and improves your workflows — so you never have to become a tech expert.</p>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <div class="num">01</div>
+        <h3>Built for small business</h3>
+        <p>No bloated enterprise features. Every workflow is scoped for the real problems owners face day-to-day.</p>
+      </div>
+      <div class="why-item">
+        <div class="num">02</div>
+        <h3>Free pilot — no risk</h3>
+        <p>We build your first workflow at no cost. You only pay if it works and you want to keep going.</p>
+      </div>
+      <div class="why-item">
+        <div class="num">03</div>
+        <h3>Works in your existing stack</h3>
+        <p>No need to switch tools. We connect into Gmail, Google Sheets, HubSpot, or whatever you already use.</p>
+      </div>
+      <div class="why-item">
+        <div class="num">04</div>
+        <h3>Ongoing support included</h3>
+        <p>Retainer clients get continuous updates, monitoring, and new automations as your business evolves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="industries" id="industries">
+  <div class="industries-inner">
+    <div class="section-label">Industries</div>
+    <h2 class="section-title">Specialized in the verticals <em>we know best.</em></h2>
+    <p class="section-sub">We go deep on a few industries rather than shallow on everything.</p>
+    <div class="ind-grid reveal">
+      <div class="ind-card"><div class="ind-icon">🏢</div><h3>Insurance Agencies</h3><p>Lead routing, renewal reminders, client onboarding, and carrier data sync.</p></div>
+      <div class="ind-card"><div class="ind-icon">🏠</div><h3>Real Estate</h3><p>Buyer/seller follow-ups, listing alerts, contract workflows, and referral tracking.</p></div>
+      <div class="ind-card"><div class="ind-icon">❄️</div><h3>HVAC</h3><p>Job scheduling, estimate follow-ups, maintenance reminders, and review requests.</p></div>
+      <div class="ind-card"><div class="ind-icon">🔧</div><h3>Plumbing & Trades</h3><p>Lead capture, appointment confirmations, invoice reminders, and customer follow-ups.</p></div>
+      <div class="ind-card"><div class="ind-icon">🏗️</div><h3>Roofing</h3><p>Storm damage lead workflows, estimate tracking, crew scheduling, and close notifications.</p></div>
+      <div class="ind-card"><div class="ind-icon">📐</div><h3>Other Small Business</h3><p>If you have repetitive processes eating your time, we can automate them. Let's talk.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pilot" id="contact">
+  <div class="pilot-inner reveal">
+    <div class="pilot-badge">✦ Limited spots available</div>
+    <h2>Start your free<br><em>automation pilot.</em></h2>
+    <p>We'll build your first custom workflow at no charge — no contracts, no pressure. If you love it, we'll talk about what's next. Book a 20-minute discovery call to get started.</p>
+    <div class="pilot-ctas">
+      <a href="mailto:hello@amnicauto.com" class="btn-primary">
+        Book a Free Discovery Call
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="mailto:hello@amnicauto.com" class="btn-secondary">Email Us Directly</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo">Amnic<span>.</span></a>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#industries">Industries</a>
+    <a href="about.html">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>© 2025 Amnic Automation. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+</script>
+</body>
+</html>

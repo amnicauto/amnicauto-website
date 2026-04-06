@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Amnic Automation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f4f9ff;
+      --surface2: #eaf3ff;
+      --border: #d0e4f7;
+      --text: #0d1b2a;
+      --muted: #5a7a96;
+      --accent: #1a6fba;
+      --accent-light: #e6f1fb;
+      --accent-hover: #145ea3;
+      --accent-mid: #3b8fd4;
+      --tag-bg: #eaf3ff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 64px;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.35rem; color: var(--text);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .btn-nav {
+      background: var(--accent); color: #fff !important;
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      font-weight: 500 !important; transition: background 0.2s !important;
+    }
+    .btn-nav:hover { background: var(--accent-hover) !important; }
+
+    /* ── HERO ── */
+    .about-hero {
+      padding: 140px 5vw 90px;
+      background: linear-gradient(160deg, #ffffff 0%, #eaf3ff 60%, #d6eaff 100%);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .hero-orb {
+      position: absolute; right: -10vw; top: -10%;
+      width: clamp(250px, 40vw, 520px); height: clamp(250px, 40vw, 520px);
+      background: radial-gradient(circle, #b8d8f8 0%, transparent 70%);
+      border-radius: 50%; opacity: 0.5; pointer-events: none;
+      animation: floatOrb 9s ease-in-out infinite;
+    }
+    .hero-orb2 {
+      position: absolute; left: -8vw; bottom: -5%;
+      width: clamp(180px, 25vw, 320px); height: clamp(180px, 25vw, 320px);
+      background: radial-gradient(circle, #c9e4fa 0%, transparent 70%);
+      border-radius: 50%; opacity: 0.45; pointer-events: none;
+      animation: floatOrb 12s 3s ease-in-out infinite;
+    }
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+    .about-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--accent); background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      margin-bottom: 1.75rem; backdrop-filter: blur(6px);
+      animation: fadeUp 0.5s ease both;
+    }
+    .about-hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      line-height: 1.08; letter-spacing: -0.03em;
+      animation: fadeUp 0.55s 0.1s ease both;
+    }
+    .about-hero h1 em { font-style: italic; color: var(--accent); }
+    .about-hero p {
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      color: var(--muted); max-width: 48ch; margin: 1.25rem auto 0;
+      font-weight: 300; line-height: 1.75;
+      animation: fadeUp 0.55s 0.2s ease both;
+    }
+
+    /* ── MISSION ── */
+    .mission {
+      padding: 90px 5vw;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .mission-inner {
+      max-width: 860px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center;
+    }
+    .mission-text .label {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .mission-text h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.25rem;
+    }
+    .mission-text h2 em { font-style: italic; color: var(--accent); }
+    .mission-text p {
+      font-size: 0.975rem; color: var(--muted);
+      line-height: 1.8; font-weight: 300; margin-bottom: 1rem;
+    }
+    .mission-stats {
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
+    .stat-box .stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.4rem; color: var(--accent);
+      line-height: 1; margin-bottom: 0.3rem;
+    }
+    .stat-box .stat-label {
+      font-size: 0.85rem; color: var(--muted); font-weight: 400;
+    }
+    @media (max-width: 700px) {
+      .mission-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ── TEAM ── */
+    .team {
+      padding: 90px 5vw;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .team-inner { max-width: 1000px; margin: 0 auto; }
+    .team-header { text-align: center; margin-bottom: 4rem; }
+    .team-header .label {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .team-header h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.1; letter-spacing: -0.025em;
+    }
+    .team-header h2 em { font-style: italic; color: var(--accent); }
+
+    .team-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+    }
+    .team-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.25s;
+    }
+    .team-card:hover { box-shadow: 0 16px 48px rgba(26,111,186,0.1); transform: translateY(-4px); }
+    .card-top {
+      padding: 2.5rem 2rem 0;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #ddeeff 100%);
+      display: flex; align-items: flex-end; gap: 1.5rem;
+      min-height: 160px; position: relative;
+    }
+    .avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: var(--accent);
+      border: 4px solid #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem; color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(26,111,186,0.25);
+      margin-bottom: -20px;
+    }
+    .card-top-info { padding-bottom: 1.5rem; }
+    .card-role {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 500;
+      background: var(--accent); color: #fff;
+      padding: 0.2rem 0.65rem; border-radius: 100px;
+      margin-bottom: 0.4rem; letter-spacing: 0.04em;
+    }
+    .card-body { padding: 2rem 2rem 2rem; padding-top: 2.5rem; }
+    .card-body h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.6rem; letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+    .card-body .title {
+      font-size: 0.82rem; color: var(--accent); font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .card-body p {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.75; font-weight: 300; margin-bottom: 1rem;
+    }
+    .card-body p:last-of-type { margin-bottom: 1.5rem; }
+    .card-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .skill-tag {
+      font-size: 0.72rem; font-weight: 500;
+      background: var(--tag-bg); color: var(--accent);
+      padding: 0.25rem 0.65rem; border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── VALUES ── */
+    .values {
+      padding: 90px 5vw;
+      background: var(--accent);
+    }
+    .values-inner { max-width: 1000px; margin: 0 auto; }
+    .values .label { font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .values h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 3rem;
+    }
+    .values h2 em { font-style: italic; color: rgba(255,255,255,0.6); }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+    }
+    .value-item {
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      transition: background 0.2s;
+    }
+    .value-item:hover { background: rgba(255,255,255,0.14); }
+    .value-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .value-item h3 { font-size: 0.95rem; font-weight: 500; color: #fff; margin-bottom: 0.4rem; }
+    .value-item p { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 90px 5vw;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-inner .label { font-size: 0.75rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .cta-inner h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 1rem;
+    }
+    .cta-inner h2 em { font-style: italic; color: var(--accent); }
+    .cta-inner p { color: var(--muted); font-weight: 300; font-size: 1rem; line-height: 1.75; margin-bottom: 2rem; }
+    .cta-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      padding: 0.8rem 1.75rem; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 500; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      box-shadow: 0 4px 18px rgba(26,111,186,0.25);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,111,186,0.3); }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      padding: 0.8rem 1.75rem; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 400; text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 5vw;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      background: var(--bg);
+    }
+    .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+    .footer-logo span { color: var(--accent); }
+    footer p { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 640px) {
+      .nav-links .hide-mobile { display: none; }
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Amnic<span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html#services" class="hide-mobile">Services</a>
+    <a href="index.html#industries" class="hide-mobile">Industries</a>
+    <a href="about.html" class="active hide-mobile">About</a>
+    <a href="index.html#contact" class="btn-nav">Book a Free Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="about-eyebrow">Our Story</div>
+  <h1>Built by builders.<br><em>For business owners.</em></h1>
+  <p>We started Amnic because small businesses deserve the same automation power as Fortune 500 companies — without the enterprise price tag or the IT department.</p>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-inner reveal">
+    <div class="mission-text">
+      <div class="label">Our Mission</div>
+      <h2>Automate the grind.<br><em>Amplify the work that matters.</em></h2>
+      <p>Most small business owners spend hours every week on tasks that a well-built workflow could handle in seconds. We think that's a problem worth solving.</p>
+      <p>Amnic was founded on a simple idea: bring the power of AI automation directly to the independent agencies, brokerages, and trade businesses that keep local economies running — without requiring them to become engineers.</p>
+      <p>We build, we maintain, we improve. You focus on your clients.</p>
+    </div>
+    <div class="mission-stats">
+      <div class="stat-box">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Custom-built workflows — no cookie-cutter templates</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">&lt; 1 wk</div>
+        <div class="stat-label">Average time from discovery call to live workflow</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">Cost for your first pilot automation — no strings attached</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="team-inner">
+    <div class="team-header reveal">
+      <div class="label">The Team</div>
+      <h2>Two people, <em>one mission.</em></h2>
+    </div>
+    <div class="team-grid reveal">
+
+      <!-- GUS -->
+      <div class="team-card">
+        <div class="card-top">
+          <div class="avatar">G</div>
+          <div class="card-top-info">
+            <div class="card-role">Co-Founder</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>Gus Moll</h3>
+          <div class="title">Technical Lead · Automation Architect</div>
+          <p>Gus is the engine behind every workflow Amnic delivers. He designs, builds, and deploys custom n8n automations — connecting the tools clients already use into systems that run themselves.</p>
+          <p>With deep hands-on experience in AI workflow design, API integrations, and automation architecture, Gus turns complex business processes into elegant, reliable systems. If it can be automated, he'll figure out how.</p>
+          <div class="card-skills">
+            <span class="skill-tag">n8n</span>
+            <span class="skill-tag">Workflow Architecture</span>
+            <span class="skill-tag">API Integrations</span>
+            <span class="skill-tag">AI Agents</span>
+            <span class="skill-tag">Process Automation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOMINIC -->
+      <div class="team-card">
+        <div class="card-top">
+          <div class="avatar">D</div>
+          <div class="card-top-info">
+            <div class="card-role">Co-Founder</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>Dominic Vansaghi</h3>
+          <div class="title">Business Development · Client Strategy</div>
+          <p>Dominic is the voice of Amnic — the one who finds the right clients, understands their real pain points, and translates business problems into automation opportunities.</p>
+          <p>With a sharp eye for sales strategy and relationship building, Dominic ensures that every client engagement starts with clarity and ends with results. He's the reason clients feel confident saying yes.</p>
+          <div class="card-skills">
+            <span class="skill-tag">Sales Strategy</span>
+            <span class="skill-tag">Client Relations</span>
+            <span class="skill-tag">Business Development</span>
+            <span class="skill-tag">Cold Outreach</span>
+            <span class="skill-tag">Discovery</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-inner">
+    <div class="label">What We Believe</div>
+    <h2>Simple principles.<br><em>Real results.</em></h2>
+    <div class="values-grid reveal">
+      <div class="value-item">
+        <div class="value-icon">🎯</div>
+        <h3>Start narrow, go deep</h3>
+        <p>We specialize in a handful of industries so our workflows fit your actual day-to-day — not a generic template.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">🤝</div>
+        <h3>Earn trust first</h3>
+        <p>We offer a free pilot because we'd rather prove our value than promise it. No pressure, no contracts up front.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">🔧</div>
+        <h3>Own the result</h3>
+        <p>We don't hand you a workflow and disappear. We maintain, monitor, and improve your automations over time.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">⚡</div>
+        <h3>Move fast</h3>
+        <p>You shouldn't wait weeks for a result. We move quickly from discovery to delivery without cutting corners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <div class="label">Work With Us</div>
+    <h2>Ready to reclaim<br><em>your time?</em></h2>
+    <p>Book a free 20-minute discovery call. We'll learn about your business, identify what to automate first, and build it for you at no cost.</p>
+    <div class="cta-btns">
+      <a href="mailto:hello@amnicauto.com" class="btn-primary">
+        Book a Free Discovery Call
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="index.html" class="btn-secondary">← Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo">Amnic<span>.</span></a>
+  <div class="footer-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="about.html">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <p>© 2025 Amnic Automation. All rights reserved.</p>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
